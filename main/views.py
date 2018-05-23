@@ -38,11 +38,11 @@ def save_file(request):
     with open(file_name, 'rb') as f:
         response = HttpResponse(f.read())
 
-        # file_type = mime.guess_type(file_name)
-        # if file_type is None:
-        #     file_type = 'application/octet-stream'
+        file_type = mime.guess_type(file_name)
+        if file_type is None:
+            file_type = 'application/octet-stream'
 
-        response['Content-Type'] = 'application/json'
+        response['Content-Type'] = file_type
         response['Content-Length'] = str(os.stat(file_name).st_size)
         response['Content-Disposition'] = "attachment; filename="+file_name
 
