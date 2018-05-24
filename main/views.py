@@ -1,14 +1,9 @@
 from django.shortcuts import render, HttpResponse
-# from django.http import  HttpResponse
 from mimetypes import MimeTypes
 import os
-import platform
 import json
 
-
-# import vulners
-import vulners
-
+import requests
 
 
 
@@ -16,18 +11,26 @@ import vulners
 
 
 def index(request):
-    vulners_api = vulners.Vulners()
 
     cl_platform =  str(request.user_agent.os.family)
     cl_ver = str(request.user_agent.os.version_string)
-    query = cl_platform + ' '+ cl_ver
 
-    res = vulners_api.search(query)
+    query_s = cl_platform + ' '+ cl_ver
+
+    print(query_s)
+
+    query = {'query': query_s,
+             'references':True,
+             'sort':'published',
+             'fields':['id']
+             }
+    headers = {'accept':'application/json','Content-Type':'application/x-www-form-urlencoded'}
+    res = requests.post('https://vulners.com/api/v3/search/lucene',  data=json.dumps(query), headers=headers)
 
     file_name = 'file.txt'
     with open(file_name,'w') as f:
-        json.dump(res,f, indent=8)
-    return render(request, 'index.html',{'query':query,'res':json.dumps(res, indent=4)})
+        json.dump(res.json(),f, indent=8)
+    return render(request, 'index.html',{'query':query_s,'output':res.text})
 
 
 
