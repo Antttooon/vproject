@@ -1,29 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-<div>
-    <p>{{query}}</p>
-     <!--style="height:500px; width:900px; margin-left:50px; overflow-y:scroll;">-->
-    <pre style="height:500px; width:900px; margin-left:50px; overflow-y:scroll;">
-        {{ output|safe}}
-
-    </pre>
-
-
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="text-center">List of vulnerabilities in your platform <br> <strong>{{ query}}</strong> </h1>
+            <div class="info-block">
+                <pre>
+                    {{ output }}
+                </pre>
+            </div>
+        </div>
+    </div>
 </div>
-
-<form action="{% url 'save_file' %}">
-    <input type="submit" value="Submit">
-</form>
-
-
-
-
-
-</body>
-</html>
+{% endblock %}

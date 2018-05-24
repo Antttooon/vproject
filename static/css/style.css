@@ -1,0 +1,45 @@
+
+html, body{
+    overflow-x: hidden;
+}
+
+
+.info-block{
+    margin:30px auto;
+}
+
+h1{
+    max-width:70%;
+    margin:0 auto;
+}
+
+.info-block pre{
+    position:relative;
+    height:80%;
+    overflow:scroll;
+}
+
+.footer{
+    background:#ccc;
+}
+
+.footer>div{
+    height:100px;
+    font-size: 20px;
+    color:#f3f3f3;
+}
+
+.footer-text{
+    position:relative;
+    top:35%;
+}
+
+
+@media screen and (max-width:768px){
+    h1{
+        font-size:18px;
+    }
+    pre{
+        font-size:7px;
+    }
+}
