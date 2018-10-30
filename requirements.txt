@@ -1,6 +1,6 @@
 certifi==2018.4.16
 chardet==3.0.4
-Django==1.8
+Django==1.11
 django-user-agents==0.3.2
 idna==2.6
 requests==2.18.4
